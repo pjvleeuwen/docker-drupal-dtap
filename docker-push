@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+usage() { echo "Usage: ${0} [--tag <string>]" 1>&2; exit 1; }
+unset TAG
+case "$#" in
+  0) TAG=latest;;
+  2) case "$1" in
+       --tag) TAG="$2";;
+       *) usage;;
+     esac;;
+  *) usage;;
+esac
+docker push "pjvleeuwen/drupal-dtap:${TAG}"
+
